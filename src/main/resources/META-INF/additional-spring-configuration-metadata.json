@@ -1,0 +1,24 @@
+{
+  "properties": [
+    {
+      "name": "application.domain",
+      "type": "java.lang.String",
+      "description": "Domain of the authorization server."
+    },
+    {
+      "name": "spring.security.oauth2.superadmin.username",
+      "type": "java.lang.String",
+      "description": "Client ID for default user. This user created when application starts and has access to create or delete users. Default value is 'admin'.",
+      "defaultValue": "admin"
+    },
+    {
+      "name": "spring.security.oauth2.superadmin.secret",
+      "type": "java.lang.String",
+      "description": "Secret for default user. This user created when application starts and has access to create or delete users."
+    },
+    {
+      "name": "spring.security.oauth2.superadmin.enabled",
+      "type": "java.lang.String",
+      "description": "False to disable default user."
+    }
+  ] }
