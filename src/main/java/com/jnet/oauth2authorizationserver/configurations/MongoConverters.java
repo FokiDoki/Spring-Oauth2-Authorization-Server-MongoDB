@@ -10,9 +10,8 @@ import java.util.Arrays;
 @Configuration
 public class MongoConverters {
 
-    @Bean
-    public MongoCustomConversions mongoCustomConversions() {
 
+    public MongoCustomConversions mongoCustomConversions() {
         return new MongoCustomConversions(
                 Arrays.asList(
                         new DurationToMapConverter(),
