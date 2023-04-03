@@ -1,9 +1,6 @@
 package com.jnet.oauth2authorizationserver.configurations;
 
-import com.jnet.oauth2authorizationserver.configurations.converters.DurationToMapConverter;
-import com.jnet.oauth2authorizationserver.configurations.converters.MapToSignatureAlgorithmConveter;
-import com.jnet.oauth2authorizationserver.configurations.converters.ObjToDurationConverter;
-import com.jnet.oauth2authorizationserver.configurations.converters.SignatureAlgorithmToMap;
+import com.jnet.oauth2authorizationserver.configurations.converters.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
@@ -33,7 +30,9 @@ public class MongoConfig {
                         new DurationToMapConverter(),
                         new MapToSignatureAlgorithmConveter(),
                         new ObjToDurationConverter(),
-                        new SignatureAlgorithmToMap()
+                        new SignatureAlgorithmToMap(),
+                        new Oauth2AccessTokenToMongo(),
+                        new ObjectToToken()
                 ));
     }
 
