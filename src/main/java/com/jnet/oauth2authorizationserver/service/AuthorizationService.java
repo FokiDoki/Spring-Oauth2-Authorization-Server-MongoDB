@@ -18,11 +18,6 @@ public class AuthorizationService implements OAuth2AuthorizationService {
     @Override
     public void save(OAuth2Authorization authorization) {
         authorizationRepository.save(authorization);
-        OAuth2Authorization dbAuth = authorizationRepository.findById(authorization.getId()).orElse(null);
-        System.out.println(dbAuth.hashCode());
-        System.out.println(authorization.hashCode());
-        System.out.println(authorization.equals(dbAuth));
-        System.out.println("aga");
     }
 
     @Override
@@ -32,7 +27,7 @@ public class AuthorizationService implements OAuth2AuthorizationService {
 
     @Override
     public OAuth2Authorization findById(String id) {
-        return authorizationRepository.findById(id).orElse(null);//todo: создать конвертер для OAuth2Authorization
+        return authorizationRepository.findById(id).orElse(null);
     }
 
     @Override
