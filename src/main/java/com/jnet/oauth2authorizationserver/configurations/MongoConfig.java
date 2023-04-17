@@ -38,10 +38,10 @@ public class MongoConfig {
         return new MongoCustomConversions(
                 Arrays.asList(
                         new DurationToMapConverter(),
-                        new MapToSignatureAlgorithmConveter(),
+                        new MapToSignatureAlgorithmConverter(),
                         new ObjToDurationConverter(),
                         new SignatureAlgorithmToMap(),
-                        new Oauth2AccessTokenToMongo(),
+                        new StringToOauth2TokenConverter(),
                         objectToToken,
                         new StringToInstantConverter(),
                         new InstantToStringConverter()

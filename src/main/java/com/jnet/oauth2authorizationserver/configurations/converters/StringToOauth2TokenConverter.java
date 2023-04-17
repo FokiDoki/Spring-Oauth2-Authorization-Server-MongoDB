@@ -6,7 +6,7 @@ import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2Token;
 
 @ReadingConverter
-public class Oauth2AccessTokenToMongo implements Converter<String, Class<? extends OAuth2Token>> {
+public class StringToOauth2TokenConverter implements Converter<String, Class<? extends OAuth2Token>> {
     @Override
     public Class<? extends OAuth2Token> convert(String source) {
         String className = source.split(" ")[1];
