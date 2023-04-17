@@ -4,7 +4,6 @@ import com.jnet.oauth2authorizationserver.repository.Oauth2AuthorizationReposito
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
-import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.stereotype.Component;
 
 @Component

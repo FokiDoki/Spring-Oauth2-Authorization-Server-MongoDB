@@ -1,26 +1,20 @@
 package com.jnet.oauth2authorizationserver.configurations.converters;
 
-import com.mongodb.DBObject;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.bson.Document;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
-import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
-import org.springframework.security.oauth2.core.OAuth2Token;
-import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Instant;
@@ -38,7 +32,6 @@ public class ObjectToToken implements Converter<Document, OAuth2Authorization.To
     @SneakyThrows
     @Override
     public OAuth2Authorization.Token convert(Document source) {
-
         RegisteredClient registeredClient = getEmptyRegistredClient();
         OAuth2Authorization.Builder oAuth2Authorization = OAuth2Authorization.withRegisteredClient(registeredClient);
         TokenData token = TokenData.fromMap((Document) source.get("token"));

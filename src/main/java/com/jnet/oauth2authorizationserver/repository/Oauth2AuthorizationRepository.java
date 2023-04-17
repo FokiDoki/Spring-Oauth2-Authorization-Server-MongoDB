@@ -3,7 +3,6 @@ package com.jnet.oauth2authorizationserver.repository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
-import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 
 import java.util.Optional;
 
