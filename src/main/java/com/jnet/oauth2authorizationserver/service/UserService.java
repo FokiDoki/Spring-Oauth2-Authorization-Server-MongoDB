@@ -1,6 +1,6 @@
 package com.jnet.oauth2authorizationserver.service;
 
-import com.jnet.oauth2authorizationserver.dto.User;
+import com.jnet.oauth2authorizationserver.entity.User;
 import com.jnet.oauth2authorizationserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

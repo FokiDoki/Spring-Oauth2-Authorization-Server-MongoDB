@@ -1,4 +1,4 @@
-package com.jnet.oauth2authorizationserver.dto;
+package com.jnet.oauth2authorizationserver.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

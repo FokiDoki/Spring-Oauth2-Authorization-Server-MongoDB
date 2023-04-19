@@ -1,8 +1,6 @@
-package com.jnet.oauth2authorizationserver.dto;
+package com.jnet.oauth2authorizationserver.entity;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,17 +8,14 @@ import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 
-import java.net.URL;
-import java.time.Instant;
-import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@Document(collection = "oauth2_authorization")
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class OAuth2AuthorizationDetails {
+@Document(collection = "oauth2_authorizations")
+public class OAuth2AuthorizationDTO {
     @Id
     private String id;
     private String registeredClientId;
@@ -33,8 +28,8 @@ public class OAuth2AuthorizationDetails {
     private Map<String, Object> refreshTokenMetadata;
     private Map<String, Object> attributes;
 
-    public static OAuth2AuthorizationDetails from(OAuth2Authorization token){
-        OAuth2AuthorizationDetails details = new OAuth2AuthorizationDetails();
+    public static OAuth2AuthorizationDTO from(OAuth2Authorization token){
+        OAuth2AuthorizationDTO details = new OAuth2AuthorizationDTO();
         details.id = token.getId();
         details.registeredClientId = token.getRegisteredClientId();
         details.principalName = token.getPrincipalName();
@@ -49,7 +44,7 @@ public class OAuth2AuthorizationDetails {
         details.attributes = token.getAttributes();
         return details;
     }
-    private static RegisteredClient getRegistredClientFromOauth2Authorization(OAuth2AuthorizationDetails details){
+    private static RegisteredClient getRegistredClientFromOauth2Authorization(OAuth2AuthorizationDTO details){
         Consumer<Set<String>> scopesConsumer = scopes -> scopes=details.authorizedScopes;
         return RegisteredClient.withId(details.registeredClientId)
                 .clientId(details.principalName)
@@ -57,7 +52,10 @@ public class OAuth2AuthorizationDetails {
                 .authorizationGrantType(details.authorizationGrantType)
                 .build();
     }
-    public static OAuth2Authorization to(OAuth2AuthorizationDetails details){
+    public static OAuth2Authorization to(OAuth2AuthorizationDTO details){
+        if (details==null){
+            return null;
+        }
         OAuth2Authorization.Builder builder = OAuth2Authorization.withRegisteredClient(
                 getRegistredClientFromOauth2Authorization(details))
                 .id(details.id)

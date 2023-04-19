@@ -1,10 +1,7 @@
 package com.jnet.oauth2authorizationserver.configurations;
 
-import com.jnet.oauth2authorizationserver.configurations.converters.reader.DurationReader;
-import com.jnet.oauth2authorizationserver.configurations.converters.reader.InstantReader;
-import com.jnet.oauth2authorizationserver.configurations.converters.reader.OAuth2AccessTokenReader;
-import com.jnet.oauth2authorizationserver.configurations.converters.reader.SignatureAlgorithmReader;
-import com.jnet.oauth2authorizationserver.configurations.converters.writer.InstantWriter;
+import com.jnet.oauth2authorizationserver.configurations.converters.reader.*;
+import com.jnet.oauth2authorizationserver.configurations.converters.writer.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +34,7 @@ public class MongoConfig {
                 Arrays.asList(
                         new SignatureAlgorithmReader(),
                         new DurationReader(),
+                        new DurationWriter(),
                         new InstantReader(),
                         new InstantWriter(),
                         new OAuth2AccessTokenReader()

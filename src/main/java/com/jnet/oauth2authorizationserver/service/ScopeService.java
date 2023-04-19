@@ -1,7 +1,7 @@
 package com.jnet.oauth2authorizationserver.service;
 
-import com.jnet.oauth2authorizationserver.dto.Scope;
-import com.jnet.oauth2authorizationserver.dto.ScopeUser;
+import com.jnet.oauth2authorizationserver.entity.Scope;
+import com.jnet.oauth2authorizationserver.entity.RoleScopes;
 import com.jnet.oauth2authorizationserver.repository.ScopeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +21,8 @@ public class ScopeService {
         }
     }
 
-    public ScopeUser getScopeUser(String username) {
-        return new ScopeUser(username, scopeRepository.findByOwner(username));
+    public RoleScopes getRoleScopes(String username) {
+        return new RoleScopes(username, scopeRepository.findByOwner(username));
     }
 
 

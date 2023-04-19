@@ -1,6 +1,6 @@
 package com.jnet.oauth2authorizationserver.configurations;
 
-import com.jnet.oauth2authorizationserver.repository.MongoRegistredClientRepository;
+import com.jnet.oauth2authorizationserver.service.MongoRegistredClientsService;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
@@ -34,7 +34,7 @@ public class AuthorizationServerConfig {
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authServerSecurityFilterChain(HttpSecurity http,
-                                                             MongoRegistredClientRepository registredClientRepository) throws Exception {
+                                                             MongoRegistredClientsService registredClientRepository) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults()); // Enable OpenID Connect 1.0

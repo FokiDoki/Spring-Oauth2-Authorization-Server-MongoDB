@@ -1,6 +1,6 @@
 package com.jnet.oauth2authorizationserver.repository;
 
-import com.jnet.oauth2authorizationserver.dto.Scope;
+import com.jnet.oauth2authorizationserver.entity.Scope;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Set;

@@ -1,9 +1,10 @@
-package com.jnet.oauth2authorizationserver.dto;
+package com.jnet.oauth2authorizationserver.entity;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,6 +17,7 @@ import java.util.List;
   */
 @Data
 @NoArgsConstructor(access=AccessLevel.PROTECTED, force=true)
+@Document("oauth2_users")
 public class User implements UserDetails {
     @Id
     private String id;

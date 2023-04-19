@@ -1,4 +1,4 @@
-package com.jnet.oauth2authorizationserver.dto;
+package com.jnet.oauth2authorizationserver.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 
 @Data
 @AllArgsConstructor
-public class ScopeUser {
+public class RoleScopes {
     private String username;
     private Set<Scope> scopes;
 

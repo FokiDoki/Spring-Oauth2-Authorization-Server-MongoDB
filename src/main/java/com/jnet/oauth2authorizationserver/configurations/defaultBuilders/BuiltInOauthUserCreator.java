@@ -1,11 +1,12 @@
 package com.jnet.oauth2authorizationserver.configurations.defaultBuilders;
 
-import com.jnet.oauth2authorizationserver.dto.ScopeUser;
-import com.jnet.oauth2authorizationserver.repository.MongoRegistredClientRepository;
+import com.jnet.oauth2authorizationserver.entity.RoleScopes;
+import com.jnet.oauth2authorizationserver.service.MongoRegistredClientsService;
 import com.jnet.oauth2authorizationserver.service.ScopeService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
+@DependsOn("DefaultScopesBuilder")
 public class BuiltInOauthUserCreator {
 
     @Value("${spring.security.oauth2.superadmin.username}")
@@ -24,21 +26,21 @@ public class BuiltInOauthUserCreator {
     @Value("${spring.security.oauth2.superadmin.enabled}")
     private Boolean superAdminEnabled;
 
-    private MongoRegistredClientRepository mongoRegistredClientRepository;
+    private MongoRegistredClientsService mongoRegistredClientsService;
     private ScopeService scopeService;
 
     @Autowired
-    public BuiltInOauthUserCreator(MongoRegistredClientRepository mongoRegistredClientRepository, ScopeService scopeService) {
-        this.mongoRegistredClientRepository = mongoRegistredClientRepository;
+    public BuiltInOauthUserCreator(MongoRegistredClientsService mongoRegistredClientsService, ScopeService scopeService) {
+        this.mongoRegistredClientsService = mongoRegistredClientsService;
         this.scopeService = scopeService;
     }
 
     @PostConstruct
     public void createSuperAdmin() {
-        if (mongoRegistredClientRepository.findByClientId(superAdminUsername)!=null || !superAdminEnabled) {
+        if (mongoRegistredClientsService.findByClientId(superAdminUsername)!=null || !superAdminEnabled) {
             return;
         }
-        ScopeUser AdminScopes = scopeService.getScopeUser("ADMIN");
+        RoleScopes AdminScopes = scopeService.getRoleScopes("ADMIN");
 
         RegisteredClient admin = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId(superAdminUsername)
@@ -50,6 +52,6 @@ public class BuiltInOauthUserCreator {
                 .scopes(AdminScopes.getScopesConsumer())
                 .build();
 
-        mongoRegistredClientRepository.save(admin);
+        mongoRegistredClientsService.save(admin);
     }
 }
