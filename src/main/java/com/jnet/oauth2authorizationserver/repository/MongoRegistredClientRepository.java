@@ -6,13 +6,13 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.stereotype.Component;
 
 @Component
-
+ //todo: move
 public class MongoRegistredClientRepository implements RegisteredClientRepository {
     OauthClientsRepository registredClientRepository;
     @Autowired
     public MongoRegistredClientRepository(OauthClientsRepository registredClientRepository) {
         this.registredClientRepository = registredClientRepository;
-        registredClientRepository.findByClientId("12");
+        registredClientRepository.findByClientId("12"); //todo: remove
     }
 
     @Override

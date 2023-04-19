@@ -1,7 +1,10 @@
 package com.jnet.oauth2authorizationserver.configurations;
 
-import com.jnet.oauth2authorizationserver.configurations.converters.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jnet.oauth2authorizationserver.configurations.converters.reader.DurationReader;
+import com.jnet.oauth2authorizationserver.configurations.converters.reader.InstantReader;
+import com.jnet.oauth2authorizationserver.configurations.converters.reader.OAuth2AccessTokenReader;
+import com.jnet.oauth2authorizationserver.configurations.converters.reader.SignatureAlgorithmReader;
+import com.jnet.oauth2authorizationserver.configurations.converters.writer.InstantWriter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,12 +22,7 @@ public class MongoConfig {
 
     @Value("${spring.data.mongodb.dot.replace}")
     private String dotReplace;
-    ObjectToToken objectToToken;
 
-    @Autowired
-    public MongoConfig(ObjectToToken objectToToken) {
-        this.objectToToken = objectToToken;
-    }
     @Bean
     public MappingMongoConverter mongoConverter(MongoDatabaseFactory mongoFactory, MongoMappingContext mongoMappingContext) {
         DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoFactory);
@@ -37,14 +35,11 @@ public class MongoConfig {
     public MongoCustomConversions mongoCustomConversions(){
         return new MongoCustomConversions(
                 Arrays.asList(
-                        new DurationToMapConverter(),
-                        new MapToSignatureAlgorithmConverter(),
-                        new ObjToDurationConverter(),
-                        new SignatureAlgorithmToMap(),
-                        new StringToOauth2TokenConverter(),
-                        objectToToken,
-                        new StringToInstantConverter(),
-                        new InstantToStringConverter()
+                        new SignatureAlgorithmReader(),
+                        new DurationReader(),
+                        new InstantReader(),
+                        new InstantWriter(),
+                        new OAuth2AccessTokenReader()
                 ));
     }
 
