@@ -1,7 +1,7 @@
 package com.jnet.oauth2authorizationserver.service;
 
-import com.jnet.oauth2authorizationserver.entity.Scope;
 import com.jnet.oauth2authorizationserver.entity.RoleScopes;
+import com.jnet.oauth2authorizationserver.entity.Scope;
 import com.jnet.oauth2authorizationserver.repository.ScopeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

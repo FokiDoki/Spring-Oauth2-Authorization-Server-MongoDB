@@ -1,6 +1,5 @@
 package com.jnet.oauth2authorizationserver.configurations.converters.reader;
 
-import org.bson.Document;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
 

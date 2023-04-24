@@ -1,6 +1,5 @@
 package com.jnet.oauth2authorizationserver.entity;
 
-import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
