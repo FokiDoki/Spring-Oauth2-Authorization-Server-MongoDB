@@ -1,7 +1,7 @@
 package com.jnet.oauth2authorizationserver.configurations.defaultBuilders;
 
 import com.jnet.oauth2authorizationserver.entity.RoleScopes;
-import com.jnet.oauth2authorizationserver.service.MongoRegistredClientsService;
+import com.jnet.oauth2authorizationserver.service.RegistredClientsService;
 import com.jnet.oauth2authorizationserver.service.ScopeService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-@DependsOn("DefaultScopesBuilder")
+@DependsOn({"DefaultScopesBuilder"})
 public class BuiltInOauthUserCreator {
 
     @Value("${spring.security.oauth2.superadmin.username}")
@@ -26,18 +26,18 @@ public class BuiltInOauthUserCreator {
     @Value("${spring.security.oauth2.superadmin.enabled}")
     private Boolean superAdminEnabled;
 
-    private MongoRegistredClientsService mongoRegistredClientsService;
+    private RegistredClientsService registredClientsService;
     private ScopeService scopeService;
 
     @Autowired
-    public BuiltInOauthUserCreator(MongoRegistredClientsService mongoRegistredClientsService, ScopeService scopeService) {
-        this.mongoRegistredClientsService = mongoRegistredClientsService;
+    public BuiltInOauthUserCreator(RegistredClientsService registredClientsService, ScopeService scopeService) {
+        this.registredClientsService = registredClientsService;
         this.scopeService = scopeService;
     }
 
     @PostConstruct
     public void createSuperAdmin() {
-        if (mongoRegistredClientsService.findByClientId(superAdminUsername)!=null || !superAdminEnabled) {
+        if (registredClientsService.findByClientId(superAdminUsername)!=null || !superAdminEnabled) {
             return;
         }
         RoleScopes AdminScopes = scopeService.getRoleScopes("ADMIN");
@@ -52,6 +52,6 @@ public class BuiltInOauthUserCreator {
                 .scopes(AdminScopes.getScopesConsumer())
                 .build();
 
-        mongoRegistredClientsService.save(admin);
+        registredClientsService.save(admin);
     }
 }

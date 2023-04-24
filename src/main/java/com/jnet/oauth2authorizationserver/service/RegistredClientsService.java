@@ -8,10 +8,10 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.stereotype.Service;
 
 @Service
-public class MongoRegistredClientsService implements RegisteredClientRepository {
+public class RegistredClientsService implements RegisteredClientRepository {
     OauthClientsRepository registredClientRepository;
     @Autowired
-    public MongoRegistredClientsService(OauthClientsRepository registredClientRepository) {
+    public RegistredClientsService(OauthClientsRepository registredClientRepository) {
         this.registredClientRepository = registredClientRepository;
     }
 
